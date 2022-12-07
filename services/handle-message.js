@@ -9,7 +9,7 @@ exports.handleMessage = (event) => {
         msg = { type: "text", text: "เพชรขาใหญ่" }
     } else if (msgText === "กางอาณาเขต") {
         msg = { type: "text", text: "ห้ามเถียง!!" }
-    } else if (msgText === "1") {
+    } else if (msgText === "2") {
         msg = {
             "type": "sticker",
             "packageId": "6325",
