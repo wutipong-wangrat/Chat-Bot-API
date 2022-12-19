@@ -1,22 +1,15 @@
-const config = require('../config/line')
+const config = require('../config/line');
+const { sendImage } = require('./send-image');
+const { sendText } = require('./send-text');
 
 exports.handleMessage = (event) => {
     let msg
-    let msgText = event.message.text.toLowerCase().trim()
-    if (msgText === "ไอ้โอม") {
-        msg = { type: "text", text: "โอมมันไม่รู้เรื่องอะไรหรอก" }
-    } else if (msgText === "เพชร") {
-        msg = { type: "text", text: "เพชรขาใหญ่" }
-    } else if (msgText === "กางอาณาเขต") {
-        msg = { type: "text", text: "ห้ามเถียง!!" }
-    } else if (msgText === "1") {
-        msg = {
-            "type": "sticker",
-            "packageId": "6325",
-            "stickerId": "10979906"
-        }
-    } else {
-        msg = { type: "text", text: "สวัสดี กรุณาพิมพ์ข้อความอีกครั้ง" }
+    switch (event.message.text.toLowerCase().trim()) {
+        case "image":
+            msg = sendImage();
+            break;
+        default:
+            msg = sendText(event);
     }
     return config.client.replyMessage(event.replyToken, msg)
 }
